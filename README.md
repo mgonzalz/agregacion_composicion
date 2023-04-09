@@ -1,4 +1,4 @@
-# EEJERCICIOS DE AGREGACIÓN Y COMPOSICIÓN DE POO: UML Y CÓDIGO
+# EJERCICIOS DE AGREGACIÓN Y COMPOSICIÓN DE POO: UML Y CÓDIGO
 
 LINK: https://github.com/mgonzalz/agregacion_composicion.git
 

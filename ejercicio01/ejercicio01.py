@@ -4,82 +4,61 @@ Enunciado: modelar lo siguiente. Una empresa es propietaria de varios edificios 
 Una vez definidas estas entidades, imagine que su programa es una película estadounidense de catástrofes, en la que se destruye New York. Implemente este evento para que todas las entidades del juego tengan en cuenta las consecuencias de este cataclismo.
 '''
 #CLASES
-
-class Empresa:
-    def __init__(self, nombre):
-        self.nombre = nombre
-        self.edificios = []
-        self.empleados = []
-
-    def agregarEdificio(self, edificio):
-        self.edificios.append(edificio)
-
-    def agregarEmpleado(self, empleado):
-        self.empleados.append(empleado)
-
-    def __str__(self):
-        return self.nombre
-
-
 class Empleado:
-    def __init__(self, nombre):
+    def __init__(self, nombre, empresa):
+        if isinstance(empresa, Empresa):
+            self.empresa = empresa
+            empresa.empleados.append(self)
         self.nombre = nombre
-
     def __str__(self):
         return self.nombre
 
+class Edificio:
+    def __init__(self, nombre, ciudad, empresa):
+        if isinstance(ciudad, Ciudad):
+            self.ciudad = ciudad
+            ciudad.edificios.append(self)
+        if isinstance(empresa, Empresa):
+            self.empresa = empresa
+            empresa.edificios.append(self)
+        self.nombre = nombre
+    def __str__(self):
+        return self.nombre
 
 class Ciudad:
     def __init__(self, nombre):
         self.nombre = nombre
         self.edificios = []
-
-    def agregarEdificio(self, edificio):
-        self.edificios.append(edificio)
-    
-    def catastrofe(self):
-        print("Catastrofe en", self.nombre)
+    def __str__(self):
+        return self.nombre
+    def __del__(self):
+        print("Se destruye la ciudad de " + self.nombre)
         for edificio in self.edificios:
-            print("Edificio", edificio.nombre, "destruido")
-            for empleado in edificio.empleados_edificios:
-                print("Empleado", empleado.nombre, "muerto")
-    def __str__(self):
-        return self.nombre
+            print("Se destruye el edificio " + edificio.nombre)
 
-class Edificio(Ciudad):
-    def __init__(self, nombre, ciudad):
+class Empresa:
+    def __init__(self, nombre):
         self.nombre = nombre
-        self.empleados_edificios = []
-        ciudad.agregarEdificio(self) #Agrega el edificio a la ciudad
-
-    def empleados_edificio(self, empleado):
-        self.empleados_edificios.append(empleado)
-
+        self.empleados = []
+        self.edificios = []
     def __str__(self):
         return self.nombre
 
-#OBJETOS
-    #Ciudades
+
+#Ciudad
 ciudad1 = Ciudad("New York")
 ciudad2 = Ciudad("Los Ángeles")
 
-    #Edificios
-edificio1 = Edificio("A", ciudad1)
-edificio2 = Edificio("B", ciudad1)
-edificio3 = Edificio("C", ciudad2)
-
-    #Empleados
-empleado1 = Empleado("Martin")
-empleado2 = Empleado("Salim")
-empleado3 = Empleado("Xing")
-
-    #Agrega los empleados a los edificios correspondientes
-edificio1.empleados_edificio(empleado1)
-edificio2.empleados_edificio(empleado2)
-edificio3.empleados_edificio(empleado3)
-
-    #Empresa
+#Empresa
 empresa = Empresa("YooHoo!")
 
+#Edificios
+edificio1 = Edificio("A", ciudad1, empresa)
+edificio2 = Edificio("B", ciudad1, empresa)
+edificio3 = Edificio("C", ciudad2, empresa)
 
-ciudad1.catastrofe()
+#Empleados
+empleado1 = Empleado("Martin", empresa)
+empleado2 = Empleado("Salim", empresa)
+empleado3 = Empleado("Xing", empresa)
+

@@ -7,13 +7,17 @@ yin = Yin()
 yang = Yang()
 yin.yang = yang #Agrega el objeto yang a la clase yin
 
-print(yang) 
+print(yang) # Output: <__main__.Yang object at 0x0000026D658CBDF0>
 
-print(yang is yin.yang)
+print(yang is yin.yang) # Output: True
 
 del(yang)
 
 print("?")
+'''
+Output: ?
+        Yang destruido
+'''
 
 
 '''

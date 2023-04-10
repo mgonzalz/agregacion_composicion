@@ -10,9 +10,9 @@ yang = Yang()
 
 yin.yang = yang
 
-print(yang)
+print(yang) # Output: <__main__.Yang object at 0x0000026D658CBDF0>
 
-print(yang is yin.yang)
+print(yang is yin.yang) # Output: True
 
 yin.yang = None
 
@@ -20,10 +20,7 @@ del(yang)
 
 print("?")
 
-
 '''
-<__main__.Yang object at 0x0000026D658CBDF0>
-True
-Yang destruido
-?
+Output: Yang destruido
+        ?
 '''
